@@ -1,12 +1,29 @@
 <html>
     <body>
-    
     <p id='IP'>Loading, please wait...</p>
-    
+    <script src="https://cdn1.lncld.net/static/js/av-mini-0.6.4.js"></script>
     <script>
+        var Request = { 
+            QueryString: function (item) { 
+                var svalue = location.search.match(new RegExp("[\?\&]" + item + "=([^\&]*)(\&?)", "i")); 
+                return svalue ? svalue[1] : svalue; 
+            }
+        }
+        
+        document.getElementById("IP").innerHTML="Getting data from server...";
+        AV.initialize('CaiXYnmy3BPpcpVE9eRaKQkV-gzGzoHsz', '7tryYPnSzMGwpivDanO2yfG0');
+        var IP_User_Obj = AV.Object.extend('IP_User_Obj');
+        var ip = new IP_User_Obj();
+        var query = new AV.Query(IP_User_Obj);
+        query.get(Request.QueryString('objectId')).then(function(ip) {
+            // 成功获得实例
+            document.getElementById("IP").innerHTML="IP: " + ip.get('IP');
+          }, function(error) {
+            // 失败了
+            document.getElementById("IP").innerHTML="Error: " + error;
+          });
         
     </script>
-    <script src="https://cdn1.lncld.net/static/js/av-core-mini-1.0.0-rc7.js"></script>
     
     </body>
 </html>
