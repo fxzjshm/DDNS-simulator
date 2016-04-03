@@ -2,6 +2,7 @@
     <body>
     <p id='IP'>Loading, please wait...</p>
     <script src="https://cdn1.lncld.net/static/js/av-mini-0.6.4.js"></script>
+    <script src="DDNS-simulator-server.js"></script>
     <script>
         var Request = { 
             QueryString: function (item) { 
@@ -9,6 +10,8 @@
                 return svalue ? svalue[1] : svalue; 
             }
         }
+        
+        //document.getElementById("IP").innerHTML=getIP(Request.QueryString('objectId'));
         
         document.getElementById("IP").innerHTML="Getting data from server...";
         AV.initialize('CaiXYnmy3BPpcpVE9eRaKQkV-gzGzoHsz', '7tryYPnSzMGwpivDanO2yfG0');
