@@ -1,0 +1,6 @@
+{
+  "name": "DDNS-simulator",
+  "tagline": "",
+  "body": "﻿# DDNS-simulator\r\nThis program is under Apache Licence, but its library named “leancloud-rest-api-sdk-java-client” (I've edited) is under LGPL.\r\n",
+  "note": "Don't delete this file! It's used internally to help with page regeneration."
+}
