@@ -28,7 +28,7 @@ You will see:
 
 > {"IP":"123.45.67.89", "HostName":"your_host_name"}  
 {"updatedAt":"2016-04-17T11:04:35.619Z","objectId":"your_object_id"} 
-{"IP":"123.45.67.89","HostName":"your_host_name","createdAt":"2016-03-26T15:49:40.709Z","updatedAt":"2016-04-17T11:04:35.619Z","objectId":"your_object_id"} 
+{"IP":"123.45.67.89","HostName":"your_host_name","createdAt":"2016-03-26T15:49:40.709Z","updatedAt":"2016-04-17T11:04:35.619Z","objectId":"your_object_id"}   
 Success.
 
 It works normally.
@@ -37,7 +37,7 @@ It works normally.
 
 > {"IP":"123.45.67.89", "HostName":"your_host_name"}  
 {"updatedAt":"2016-04-17T11:04:35.619Z","objectId":"your_object_id"} 
-{"IP":"87.65.43.21","HostName":"host_name_of_yours","createdAt":"2016-03-26T15:49:40.709Z","updatedAt":"2016-04-17T11:04:35.619Z","objectId":"your_object_id"} 
+{"IP":"87.65.43.21","HostName":"host_name_of_yours","createdAt":"2016-03-26T15:49:40.709Z","updatedAt":"2016-04-17T11:04:35.619Z","objectId":"your_object_id"}     
 Something went wrong.
 
 Then you may check your Internet connection and try again.
