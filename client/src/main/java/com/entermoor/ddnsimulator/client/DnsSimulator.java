@@ -31,71 +31,49 @@ public class DnsSimulator {
 			System.exit(-1);
 		}
 
-		// LCClient client = new LCClient("CaiXYnmy3BPpcpVE9eRaKQkV-gzGzoHsz",
-		// "7tryYPnSzMGwpivDanO2yfG0");
-		// Map<String, String> data = new HashMap<String, String>();
-		// data.put("IP", webIP);
-		// data.put("HostName", InetAddress.getLocalHost().getHostName());
-		// client.put("classes/IP_User_Obj/" + args[0], data);
+		boolean isCreate = args[0].equalsIgnoreCase("create");
+		HttpsURLConnectionImpl httpCon = (HttpsURLConnectionImpl) getHttpConnection(
+				"https://leancloud.cn:443/1.1/classes/IP_User_Obj"
+						+ (isCreate ? "" : "/" + args[0]), isCreate ? "POST"
+						: "PUT");
+		httpCon.setRequestProperty("User-Agent", "curl/7.38.0");
+		httpCon.setRequestProperty("X-AVOSCloud-Application-Id",
+				"CaiXYnmy3BPpcpVE9eRaKQkV-gzGzoHsz");
+		httpCon.setRequestProperty("X-AVOSCloud-Application-Key",
+				"7tryYPnSzMGwpivDanO2yfG0");
+		httpCon.setRequestProperty("Content-Type", "application/json");
+		OutputStreamWriter out = new OutputStreamWriter(
+				httpCon.getOutputStream());
+		String data = "{\"IP\":\"" + webIP + "\", \"HostName\":\""
+				+ InetAddress.getLocalHost().getHostName() + "\"}";
+		System.out.println(data);
+		out.write(data);
+		out.close();
+		httpCon.connect();
 
-//		String cmd = "curl -X PUT -H \"X-LC-Id: CaiXYnmy3BPpcpVE9eRaKQkV-gzGzoHsz\" -H \"X-LC-Key: 7tryYPnSzMGwpivDanO2yfG0\" -H \"Content-Type: application/json\" -d '{\"IP\":\""
-//				+ webIP
-//				+ "\", \"HostName\":\""
-//				+ InetAddress.getLocalHost().getHostName()
-//				+ "\"}' https://api.leancloud.cn/1.1/classes/IP_User_Obj/"
-//				+ args[0];
-		// String cmd="ls";
+		BufferedReader in = new BufferedReader(new InputStreamReader(
+				httpCon.getInputStream()));
+		String result = null;
+		String temp = null;
+		StringBuilder sb = new StringBuilder();
+		while ((temp = in.readLine()) != null) {
+			sb.append(temp).append(" ");
+		}
+		result = sb.toString();
+		in.close();
+		System.out.println(result);
 
-//		System.out.println(cmd);
-		// exec("curl",
-		// "-X PUT -H \"X-LC-Id: CaiXYnmy3BPpcpVE9eRaKQkV-gzGzoHsz\" -H \"X-LC-Key: 7tryYPnSzMGwpivDanO2yfG0\" -H \"Content-Type: application/json\" -d {\"IP\":\""
-		// + webIP
-		// + "\", \"HostName\":\""
-		// + InetAddress.getLocalHost().getHostName()
-		// + "\"}' https://api.leancloud.cn/1.1/classes/IP_User_Obj/"+args[0]);
-
-		// exec("curl","-X PUT","-H \"X-LC-Id: CaiXYnmy3BPpcpVE9eRaKQkV-gzGzoHsz\"",
-		// "-H \"X-LC-Key: 7tryYPnSzMGwpivDanO2yfG0\"",
-		// "-H \"Content-Type: application/json\"", "-d '{\"IP\":\""
-		// + webIP
-		// + "\", \"HostName\":\""
-		// + InetAddress.getLocalHost().getHostName()
-		// + "\"}'",
-		// "https://api.leancloud.cn/1.1/classes/IP_User_Obj/"+args[0]);
-
-		// URL url = new URL("https://leancloud.cn:443/1.1/classes/IP_User_Obj/"
-		// + args[0]);
-//		for (int i = 0; i < 3; i++) {
-			HttpsURLConnectionImpl httpCon = (HttpsURLConnectionImpl) getHttpConnection(
-					"https://leancloud.cn:443/1.1/classes/IP_User_Obj/"
-							+ args[0], "PUT");
-			httpCon.setRequestProperty("User-Agent", "curl/7.38.0");
-			httpCon.setRequestProperty("X-AVOSCloud-Application-Id",
-					"CaiXYnmy3BPpcpVE9eRaKQkV-gzGzoHsz");
-			httpCon.setRequestProperty("X-AVOSCloud-Application-Key",
-					"7tryYPnSzMGwpivDanO2yfG0");
-			httpCon.setRequestProperty("Content-Type", "application/json");
-			OutputStreamWriter out = new OutputStreamWriter(
-					httpCon.getOutputStream());
-			String data = "{\"IP\":\"" + webIP + "\", \"HostName\":\""
-					+ InetAddress.getLocalHost().getHostName() + "\"}";
-			System.out.println(data);
-			out.write(data);
-			out.close();
-			httpCon.connect();
-			// httpCon.getInputStream();
-			BufferedReader in = new BufferedReader(new InputStreamReader(
-					httpCon.getInputStream()));
-			String result = null;
-			String temp = null;
-			StringBuilder sb = new StringBuilder();
-			while ((temp = in.readLine()) != null) {
-				sb.append(temp).append(" ");
+		boolean doesCheck = false;
+		for (String arg : args) {
+			if (args[0].equalsIgnoreCase("create"))
+				break;
+			if (arg.equalsIgnoreCase("-c") || arg.equalsIgnoreCase("--check")) {
+				doesCheck = true;
+				break;
 			}
-			result = sb.toString();
-			in.close();
-			System.out.println(result);
+		}
 
+		if (doesCheck) {
 			httpCon = (HttpsURLConnectionImpl) getHttpConnection(
 					"https://leancloud.cn:443/1.1/classes/IP_User_Obj/"
 							+ args[0], "GET");
@@ -104,7 +82,6 @@ public class DnsSimulator {
 			httpCon.setRequestProperty("X-AVOSCloud-Application-Key",
 					"7tryYPnSzMGwpivDanO2yfG0");
 			httpCon.connect();
-			// httpCon.getInputStream();
 			in = new BufferedReader(new InputStreamReader(
 					httpCon.getInputStream()));
 			result = null;
@@ -121,9 +98,9 @@ public class DnsSimulator {
 				System.out.println("Success.");
 				System.exit(0);
 			}
-//		}
-		System.err.println("Something went wrong.");
-		System.exit(-1);
+			System.err.println("Something went wrong.");
+			System.exit(-1);
+		}
 	}
 
 	/** From http://blog.csdn.net/gaojinshan/article/details/24725293 */
@@ -168,11 +145,10 @@ public class DnsSimulator {
 			con.setDoInput(true);
 			con.setConnectTimeout(60000); // 60 secs
 			con.setReadTimeout(60000); // 60 secs
-//			con.setRequestProperty("Accept-Encoding", "UTF-8");
-//			con.setRequestProperty("Content-Type", "UTF-8");
+			// con.setRequestProperty("Accept-Encoding", "UTF-8");
+			// con.setRequestProperty("Content-Type", "UTF-8");
 		} catch (Exception e) {
 			e.printStackTrace();
-			// logger.info( "connection i/o failed" );
 		}
 
 		return con;
