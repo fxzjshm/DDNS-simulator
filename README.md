@@ -9,7 +9,7 @@ You need to download a client java package from [here][2].
  2. Run: `java -jar DDNS-simulator.jar create`
  3. You can see some output, just like:
 
-> {"IP":"123.45.67.89", "HostName":"YourHostName"}
+> {"IP":"123.45.67.89", "HostName":"YourHostName"}  
 > {"objectId":"5713698d71cfe4005b31ab44","createdAt":"2016-04-17T10:46:37.062Z"}
 
 The mess after "objectId" is your object id. Please remember it, or write it into a file.
@@ -26,7 +26,7 @@ If you don't trust the connection you can run it with `-c` or `--check`:
     java -jar DDNS-simulator.jar your_object_id -c
 You will see:
 
-> {"IP":"123.45.67.89", "HostName":"your_host_name"}
+> {"IP":"123.45.67.89", "HostName":"your_host_name"}  
 {"updatedAt":"2016-04-17T11:04:35.619Z","objectId":"your_object_id"} 
 {"IP":"123.45.67.89","HostName":"your_host_name","createdAt":"2016-03-26T15:49:40.709Z","updatedAt":"2016-04-17T11:04:35.619Z","objectId":"your_object_id"} 
 Success.
@@ -35,7 +35,7 @@ It works normally.
 
 **But** if you see:
 
-> {"IP":"123.45.67.89", "HostName":"your_host_name"}
+> {"IP":"123.45.67.89", "HostName":"your_host_name"}  
 {"updatedAt":"2016-04-17T11:04:35.619Z","objectId":"your_object_id"} 
 {"IP":"87.65.43.21","HostName":"host_name_of_yours","createdAt":"2016-03-26T15:49:40.709Z","updatedAt":"2016-04-17T11:04:35.619Z","objectId":"your_object_id"} 
 Something went wrong.
