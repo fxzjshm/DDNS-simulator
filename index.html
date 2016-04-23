@@ -1,51 +1,128 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
+
   <head>
-    <meta charset="utf-8">
+    <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>DDNS-simulator by fxzjshm</title>
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/github-dark.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-    <script src="javascripts/respond.js"></script>
-    <!--[if lt IE 9]>
-      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    <!--[if lt IE 8]>
-    <link rel="stylesheet" href="stylesheets/ie.css">
-    <![endif]-->
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="description" content="DDNS-simulator : A project for family game server, and more...">
 
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>DDNS-simulator</title>
   </head>
+
   <body>
-      <div id="header">
-        <nav>
-          <li class="fork"><a href="https://github.com/fxzjshm/DDNS-simulator">View On GitHub</a></li>
-          <li class="downloads"><a href="https://github.com/fxzjshm/DDNS-simulator/zipball/master">ZIP</a></li>
-          <li class="downloads"><a href="https://github.com/fxzjshm/DDNS-simulator/tarball/master">TAR</a></li>
-          <li class="title">DOWNLOADS</li>
-        </nav>
-      </div><!-- end header -->
 
-    <div class="wrapper">
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/fxzjshm/DDNS-simulator">View on GitHub</a>
 
-      <section>
-        <div id="title">
-          <h1>DDNS-simulator</h1>
-          <p></p>
-          <hr>
-          <span class="credits left">Project maintained by <a href="https://github.com/fxzjshm">fxzjshm</a></span>
-          <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></span>
-        </div>
+          <h1 id="project_title">DDNS-simulator</h1>
+          <h2 id="project_tagline">A project for family game server, and more...</h2>
 
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/fxzjshm/DDNS-simulator/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/fxzjshm/DDNS-simulator/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
         <h1>
 <a id="ddns-simulator" class="anchor" href="#ddns-simulator" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>DDNS-simulator</h1>
 
-<p>This program is under Apache Licence.</p>
-      </section>
+<p>This program is under <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache Licence</a>.</p>
 
+<hr>
+
+<h3>
+<a id="client" class="anchor" href="#client" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Client</h3>
+
+<p>You need to download a client java package from <a href="https://github.com/fxzjshm/DDNS-simulator/releases/">here</a>.</p>
+
+<h4>
+<a id="initialization" class="anchor" href="#initialization" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Initialization</h4>
+
+<ol>
+<li>Make sure you have installed Java. If not, <a href="http://java.com/">here</a> it is.</li>
+<li>Run: <code>java -jar DDNS-simulator.jar create</code>
+</li>
+<li>You can see some output, just like:</li>
+</ol>
+
+<blockquote>
+<p>{"IP":"123.45.67.89", "HostName":"YourHostName"}<br>
+{"objectId":"5713698d71cfe4005b31ab44","createdAt":"2016-04-17T10:46:37.062Z"}</p>
+</blockquote>
+
+<p>The mess after "objectId" is your object id. Please remember it, or write it into a file.</p>
+
+<h4>
+<a id="later-use" class="anchor" href="#later-use" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Later use</h4>
+
+<p>To update your object id, you can run:</p>
+
+<pre><code>java -jar DDNS-simulator.jar your_object_id
+</code></pre>
+
+<p>For example:</p>
+
+<pre><code>java -jar DDNS-simulator.jar 5713698d71cfe4005b31ab44
+</code></pre>
+
+<p>If you don't trust the connection you can run it with <code>-c</code> or <code>--check</code>:</p>
+
+<pre><code>java -jar DDNS-simulator.jar your_object_id -c
+</code></pre>
+
+<p>You will see:</p>
+
+<blockquote>
+<p>{"IP":"123.45.67.89", "HostName":"your_host_name"}<br>
+{"updatedAt":"2016-04-17T11:04:35.619Z","objectId":"your_object_id"} 
+{"IP":"123.45.67.89","HostName":"your_host_name","createdAt":"2016-03-26T15:49:40.709Z","updatedAt":"2016-04-17T11:04:35.619Z","objectId":"your_object_id"}<br>
+Success.</p>
+</blockquote>
+
+<p>It works normally.</p>
+
+<p><strong>But</strong> if you see:</p>
+
+<blockquote>
+<p>{"IP":"123.45.67.89", "HostName":"your_host_name"}<br>
+{"updatedAt":"2016-04-17T11:04:35.619Z","objectId":"your_object_id"} 
+{"IP":"87.65.43.21","HostName":"host_name_of_yours","createdAt":"2016-03-26T15:49:40.709Z","updatedAt":"2016-04-17T11:04:35.619Z","objectId":"your_object_id"}<br>
+Something went wrong.</p>
+</blockquote>
+
+<p>Then you may check your Internet connection and try again.
+If it always goes wrong, please <a href="https://github.com/fxzjshm/DDNS-simulator/issues">report a bug</a>.</p>
+
+<hr>
+
+<h3>
+<a id="server" class="anchor" href="#server" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Server</h3>
+
+<p>To show your current IP in your page, you can add a frame.
+Usage (In your static page):</p>
+
+<pre><code>&lt;frame src="http://fxzjshm.github.io/DDNS-simulator/DDNS-simulator-server.html?objectId=[your_object_id]" /&gt;
+</code></pre>
+      </section>
     </div>
-    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">DDNS-simulator maintained by <a href="https://github.com/fxzjshm">fxzjshm</a></p>
+        <p>Published with <a href="https://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
     
+
   </body>
 </html>
