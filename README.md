@@ -48,8 +48,9 @@ If it always goes wrong, please [report a bug][4].
 To show your current IP in your page, you can add a frame.
 Usage (In your static page):
 
-    <frame src="http://fxzjshm.github.io/DDNS-simulator/DDNS-simulator-server.html?objectId=[your_object_id]" />
+    <iframe src="http://fxzjshm.github.io/DDNS-simulator/DDNS-simulator-server.html?objectId=[your_object_id]" />
 
+###(Example #1)[http://fxzjshm.github.io/blog/minecraft-server-1-9-on-raspberry-pi/]
 
   [1]: http://www.apache.org/licenses/LICENSE-2.0
   [2]: https://github.com/fxzjshm/DDNS-simulator/releases/
