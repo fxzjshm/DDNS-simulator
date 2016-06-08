@@ -2,18 +2,21 @@ apply plugin: "java"
 apply plugin: "eclipse"
 //apply plugin: 'executable-jar'
 
-mainClass = 'com.entermoor.ddnsimulator.client.DnsSimulator'
+def mainClassName = 'com.entermoor.ddnsimulator.client.DnsSimulator'
 
 buildscript{
     dependencies{  
-        compile fileTree(dir:'libs',include:"*.jar")
+        //compile fileTree(dir:'libs',include:"*.jar")
     }
 }
 
 //依赖编译，然后打包JAR  
 task taskJar(type:Jar, dependsOn: compileJava) {  
-    from 'build/classes'  
+    from 'build/classes/main'  
     destinationDir = file('build/libs')  
+    manifest {
+        attributes 'Main-Class': mainClassName
+    }
 }  
   
 //清除上次的编译过的文件  
@@ -29,3 +32,5 @@ task release(type: Copy,dependsOn: [clearPj,taskJar]) {
     }  
     into ('target')  
 }
+
+build.dependsOn taskJar
