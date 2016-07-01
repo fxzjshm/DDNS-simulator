@@ -16,7 +16,7 @@ app = Flask(__name__)
 leancloud.init('CaiXYnmy3BPpcpVE9eRaKQkV-gzGzoHsz','7tryYPnSzMGwpivDanO2yfG0')
 query = Query(IP_User_Obj)
 
-#@app.route('/')
+@app.route('/')
 def index():
     return render_template('index.html')
 
