@@ -57,6 +57,9 @@ def getMyIP():
 #     raise ValueError, 'Invalid object id.'
 ipObject = None
 doesCheck = False
+if len(sys.argv) is 1:
+    raise ValueError, 'Sorry but you\'ve typed in invalid object id.'
+    sys.exit(-1)
 for arg in sys.argv:
     if arg == 'create' or arg == 'Create' or arg == 'CREATE':
         ipObject=IP_User_Obj()
@@ -65,8 +68,8 @@ for arg in sys.argv:
     if len(arg) == 24:
        objectId=arg
        ipObject=IP_User_Obj.create_without_data(objectId)
-if ipObject == None:
-    raise ValueError, 'Sorry but you\'ve in invalid object id.'
+if ipObject is None:
+    raise ValueError, 'Sorry but you\'ve typed in invalid object id.'
     sys.exit(-1)
 
 ip=getMyIP()
