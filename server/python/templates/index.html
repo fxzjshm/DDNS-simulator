@@ -8,8 +8,11 @@
         <h1>DDNS Simulator</h1>
         <p>It seems that something went wrong with your URL.<br/>
            您访问的网址似乎有些问题。。。。。。</p>
-         <p>Please visit this site again with URL that contains valid object id like: <br/>
+        <p>Please visit this site again with URL that contains valid object id like: <br/>
            请重新访问本站，并附上合法的对象编号（objectID），就像：</p>
         <h4>http(s)://this.domain.again/[objectId]</h4>
+	{% if exception %}
+	<p>Exception: {{exception}}</p>
+	{% endif %}
     </body>
 </html>
