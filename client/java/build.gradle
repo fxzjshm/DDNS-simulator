@@ -2,7 +2,7 @@ apply plugin: "java"
 apply plugin: "eclipse"
 //apply plugin: 'executable-jar'
 
-def mainClassName = 'com.entermoor.ddnsimulator.client.DnsSimulator'
+def mainClassName = 'com.entermoor.ddnsimulator.client.DDnsSimulator'
 
 buildscript{
     dependencies{  

@@ -10,10 +10,10 @@ import java.net.InetAddress;
 import java.net.URL;
 import java.net.URLConnection;
 
-import sun.net.www.protocol.https.HttpsURLConnectionImpl;
+// import sun.net.www.protocol.https.HttpsURLConnectionImpl;
 
 /** @author fxzjshm */
-public class DnsSimulator {
+public class DDnsSimulator {
 
 	/**
 	 * @param args
@@ -31,37 +31,51 @@ public class DnsSimulator {
 			System.exit(1);
 		}
 
-		boolean isCreate = args[0].equalsIgnoreCase("create");
-		HttpsURLConnectionImpl httpCon = (HttpsURLConnectionImpl) getHttpConnection(
-				"https://leancloud.cn:443/1.1/classes/IP_User_Obj"
-						+ (isCreate ? "" : "/" + args[0]), isCreate ? "POST"
-						: "PUT");
-		httpCon.setRequestProperty("User-Agent", "curl/7.38.0");
-		httpCon.setRequestProperty("X-AVOSCloud-Application-Id",
-				"CaiXYnmy3BPpcpVE9eRaKQkV-gzGzoHsz");
-		httpCon.setRequestProperty("X-AVOSCloud-Application-Key",
-				"7tryYPnSzMGwpivDanO2yfG0");
-		httpCon.setRequestProperty("Content-Type", "application/json");
-		OutputStreamWriter out = new OutputStreamWriter(
-				httpCon.getOutputStream());
-		String data = "{\"IP\":\"" + webIP + "\", \"HostName\":\""
-				+ InetAddress.getLocalHost().getHostName() + "\"}";
-		System.out.println(data);
-		out.write(data);
-		out.close();
-		httpCon.connect();
+                HttpURLConnection httpCon = null;
+                OutputStreamWriter out = null;
+                BufferedReader in = null;
+                String data, result, temp;
+                StringBuilder sb;
+                try {
+		        boolean isCreate = args[0].equalsIgnoreCase("create");
+		        httpCon = getHttpConnection("https://leancloud.cn:443/1.1/classes/IP_User_Obj"
+				        		+ (isCreate ? "" : "/" + args[0]), isCreate ? "POST"
+			                        	: "PUT");
+        		httpCon.setRequestProperty("User-Agent", "curl/7.38.0");
+	        	httpCon.setRequestProperty("X-AVOSCloud-Application-Id",
+		        		"CaiXYnmy3BPpcpVE9eRaKQkV-gzGzoHsz");
+        		httpCon.setRequestProperty("X-AVOSCloud-Application-Key",
+	        			"7tryYPnSzMGwpivDanO2yfG0");
+		        httpCon.setRequestProperty("Content-Type", "application/json");
+		        out = new OutputStreamWriter(httpCon.getOutputStream());
+		        data = "{\"IP\":\"" + webIP + "\", \"HostName\":\""
+                                + InetAddress.getLocalHost().getHostName() + "\"}";
+        		System.out.println(data);
+	        	out.write(data);
+		        // out.close();
+		        httpCon.connect();
 
-		BufferedReader in = new BufferedReader(new InputStreamReader(
-				httpCon.getInputStream()));
-		String result = null;
-		String temp = null;
-		StringBuilder sb = new StringBuilder();
-		while ((temp = in.readLine()) != null) {
-			sb.append(temp).append(" ");
-		}
-		result = sb.toString();
-		in.close();
-		System.out.println(result);
+		        in = new BufferedReader(new InputStreamReader(httpCon.getInputStream()));
+        		result = null;
+		        temp = null;
+	        	sb = new StringBuilder();
+        		while ((temp = in.readLine()) != null) {
+			        sb.append(temp).append(" ");
+		        }
+		        result = sb.toString();
+		        // in.close();
+		        System.out.println(result);
+                } catch (Exception e){
+                        e.printStackTrace();
+                        System.err.println("There's something wrong with the connection.");
+                        System.err.println("Please check your object id, or report a bug at https://github.com/fxzjshm/DDNS-Simulator/issues/");
+                        System.exit(2);
+                } finally {
+                        if (null != out)
+                                out.close();
+                        if (null != in)
+                                in.close();
+                }
 
 		boolean doesCheck = false;
 		for (String arg : args) {
@@ -74,8 +88,7 @@ public class DnsSimulator {
 		}
 
 		if (doesCheck) {
-			httpCon = (HttpsURLConnectionImpl) getHttpConnection(
-					"https://leancloud.cn:443/1.1/classes/IP_User_Obj/"
+			httpCon = getHttpConnection("https://leancloud.cn:443/1.1/classes/IP_User_Obj/"
 							+ args[0], "GET");
 			httpCon.setRequestProperty("X-AVOSCloud-Application-Id",
 					"CaiXYnmy3BPpcpVE9eRaKQkV-gzGzoHsz");

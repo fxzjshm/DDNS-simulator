@@ -81,7 +81,14 @@ ipObject.save()
 print ipObject.dump()
 
 if doesCheck == True:
-    print 'Now fetching data from server. '
-    print 'Please check it by yourself. (Ignore that small \'u\')'
-    ipObject.fetch()
-    print ipObject.dump()
+    ipObject2 = IP_User_Obj.create_without_data(ipObject.get('objectId'))
+    # print 'Now fetching data from server. '
+    # print 'Please check it by yourself. (Ignore that small \'u\')'
+    ipObject2.fetch()
+    # print ipObject.dump()
+    if ipObject.get('IP') == ipObject2.get('IP'):
+        print 'Success.'
+        sys.exit(0)
+    else:
+        print 'Something went wrong. Please consider reporting this at https://github.com/fxzjshm/DDNS-Simulator/issues/'
+        sys.exit(1)
