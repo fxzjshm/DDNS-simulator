@@ -28,7 +28,7 @@ public class DnsSimulator {
 		System.out.println("Public IP : " + webIP);
 		if (args.length == 0 || args[0] == null || args[0].equals("")) {
 			System.out.println("ObjectId can't be null.");
-			System.exit(-1);
+			System.exit(1);
 		}
 
 		boolean isCreate = args[0].equalsIgnoreCase("create");
@@ -99,7 +99,7 @@ public class DnsSimulator {
 				System.exit(0);
 			}
 			System.err.println("Something went wrong.");
-			System.exit(-1);
+			System.exit(1);
 		}
 	}
 

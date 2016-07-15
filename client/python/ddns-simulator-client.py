@@ -43,7 +43,7 @@ def getMyIP():
 '''WARNING: Wrong logic reading args. '''
 # if len(argv) == 1 or argv[1] == None or argv[1] == '' :
 #     print 'ObjectId cannot be None.'
-#     sys.exit(-1)
+#     sys.exit(1)
 # if argv[1] is 'create' or argv[1] is 'Create':
 #     doesCreate = True
 #     ipObject=IP_User_Obj()
@@ -59,7 +59,7 @@ ipObject = None
 doesCheck = False
 if len(sys.argv) is 1:
     raise ValueError, 'Sorry but you\'ve typed in invalid object id.'
-    sys.exit(-1)
+    sys.exit(1)
 for arg in sys.argv:
     if arg == 'create' or arg == 'Create' or arg == 'CREATE':
         ipObject=IP_User_Obj()
@@ -70,7 +70,7 @@ for arg in sys.argv:
        ipObject=IP_User_Obj.create_without_data(objectId)
 if ipObject is None:
     raise ValueError, 'Sorry but you\'ve typed in invalid object id.'
-    sys.exit(-1)
+    sys.exit(1)
 
 ip=getMyIP()
 print 'Public IP : ' + ip
