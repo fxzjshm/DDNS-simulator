@@ -1,4 +1,6 @@
 # DDNS-simulator 
+
+[![Join the chat at https://gitter.im/fxzjshm/DDNS-simulator](https://badges.gitter.im/fxzjshm/DDNS-simulator.svg)](https://gitter.im/fxzjshm/DDNS-simulator?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 This program is under [Apache Licence][1].
 
 ----------
